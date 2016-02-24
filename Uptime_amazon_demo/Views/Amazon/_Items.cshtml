@@ -1,0 +1,44 @@
+﻿ @model AmazonVM
+<div id="itemList">
+
+    <div id="pagedList" class="pagedList" data-uptime-target="#itemList">
+        @Html.PagedListPager(Model.PagedList, pageNumber => Url.Action("Index", new { pageNumber }), PagedListRenderOptions.Minimal)
+    </div>
+
+    <table class="table table-bordered display">
+
+        <thead>
+            <tr>
+                <td>Item name</td>
+                <td>Item page</td>
+                <td>Prices from</td>
+                <td>Currency<br />
+                    <select id="changeCurrency" class="form-control">
+                        @foreach (var cur in AmazonVM.Currencies)
+                        {
+                            if (@cur.Key.Equals(Model.SelectedCurrency))
+                            {
+                                <option selected>@cur.Key</option>
+                            }
+                            else
+                            {
+                                <option>@cur.Key</option>
+                            }
+                        }
+                    </select>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.PagedList)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td><a href="@item.Url">Item on Amazon</a></td>
+                    <td>@item.Price</td>
+                    <td>@item.Currency</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

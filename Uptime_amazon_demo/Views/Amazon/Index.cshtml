@@ -1,0 +1,13 @@
+﻿@model AmazonVM
+
+<h2>Search for products on Amazon</h2>
+
+<form method="get" action="@Url.Action("Index")"
+      data-uptime-ajax="true" data-uptime-target="#itemList">
+    <div class="form-group">
+        <input type="search" name="searchTerm" class="form-control" placeholder="Insert search term here..."/>
+    </div>
+    <input type="submit" value="Search" class="btn btn-default"/>
+</form>
+
+@Html.Partial("_Items", Model)
